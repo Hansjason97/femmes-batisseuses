@@ -156,3 +156,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .component {
+    @apply w-full max-w-7xl px-7 min-[1308px]:px-0;
+  }
+}

@@ -1,15 +1,10 @@
 'use client'
 import { cn } from '@/lib/utils';
+import { Navigation } from '@/types/types';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React, { ReactNode } from 'react'
 
-interface Props {
-    children: ReactNode;
-    href: string;
-}
-
-function NavLink({children, href}:Props) {
+function NavLink({children, href}:Navigation) {
 
     const pathname = usePathname();
     const isActive = pathname === href;
