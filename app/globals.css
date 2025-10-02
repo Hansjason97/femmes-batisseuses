@@ -25,6 +25,7 @@
   --color-input: var(--input);
   --color-border: var(--border);
   --color-text-default: oklch(0.1776 0 0);
+  --color-text-gray: oklch(0.4091 0 0);
   --color-destructive: var(--destructive);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
@@ -63,7 +64,7 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
+  --background: oklch(0.9851 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -150,15 +151,27 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border outline-ring/50 font-sans;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-text-default;
+  }
+  h1 {
+    @apply font-extrabold leading-[125%] tracking-[-2%] text-[30px] sm:text-[36px] md:text-[40px] lg:text-[44px] xl:text-[48px];
+  }
+  h2 {
+    @apply font-extrabold leading-[125%] tracking-[-2%] text-[28px] sm:text-[30px] md:text-[32px] lg:text-[36px] xl:text-[40px];
   }
 }
 
 @layer components {
   .component {
-    @apply w-full max-w-7xl px-7 min-[1308px]:px-0;
+    @apply mx-auto w-full max-w-7xl px-7 min-[1308px]:px-0;
+  }
+  .box-container {
+    @apply mx-auto w-full max-w-7xl px-7 min-[1308px]:px-0 py-10 sm:py-16 md:py-20 lg:py-24 xl:py-28;
+  }
+  .subtitle-text {
+    @apply leading-[125%] tracking-[-2%] text-[14px] md:text-[16px];
   }
 }
