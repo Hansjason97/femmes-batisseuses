@@ -8,7 +8,7 @@ import { Menu } from "lucide-react";
 
 function Navbar() {
   return (
-    <div className="h-[72px] w-full sticky top-0 border-b flex items-center justify-center">
+    <div className="h-[72px] w-full sticky top-0 border-b flex items-center justify-center bg-background">
       <nav className="flex items-center justify-between component">
         <Link href={"/"}>
           <img src={"/images/logo.webp"} className="h-8 w-auto" />
