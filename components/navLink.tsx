@@ -17,4 +17,12 @@ function NavLink({children, href}:Navigation) {
   )
 }
 
+export function MobileLink({children, href}:Navigation) {
+  const pathname = usePathname();
+    const isActive = pathname === href
+  return (
+    <Link href={href} className={cn("w-full px-4 flex items-center h-14 cursor-pointer text-sm capitalize font-medium", isActive && "bg-primary-400 text-white")}>{children}</Link>
+  )
+}
+
 export default NavLink
