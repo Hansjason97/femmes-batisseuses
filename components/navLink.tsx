@@ -23,6 +23,14 @@ export function MobileLink({children, href}:Navigation) {
   return (
     <Link href={href} className={cn("w-full px-4 flex items-center h-14 cursor-pointer text-sm capitalize font-medium", isActive && "bg-primary-400 text-white")}>{children}</Link>
   )
+};
+
+export function FooterLink({children, href}:Navigation) {
+  const pathname = usePathname();
+    const isActive = pathname === href;
+  return (
+    <Link href={href} className={cn("text-sm font-medium text-white transition-all duration-150 ease-out hover:text-secondary-100", isActive && "text-secondary-400 hover:text-secondary-500")}>{children}</Link>
+  )
 }
 
 export default NavLink

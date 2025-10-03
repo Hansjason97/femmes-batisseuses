@@ -12,7 +12,7 @@ import { usePathname } from "next/navigation";
 function Navbar() {
   const pathname = usePathname();
   return (
-    <div className="h-[72px] w-full sticky top-0 border-b flex items-center justify-center bg-background">
+    <div className="h-[72px] w-full sticky z-20 top-0 border-b flex items-center justify-center bg-background">
       <nav className="flex items-center justify-between component">
         <Link href={"/"}>
           <img src={"/images/logo.webp"} className="h-8 w-auto" />
