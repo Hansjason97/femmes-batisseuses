@@ -47,7 +47,9 @@ function Navbar() {
               </SheetContent>
             </Sheet>
           </span>
-          <Button variant={"primary"}>{"Faire un Don"}</Button>
+          <Link href={"/don"}>
+            <Button variant={"primary"}>{"Faire un Don"}</Button>
+          </Link>
         </div>
       </nav>
     </div>

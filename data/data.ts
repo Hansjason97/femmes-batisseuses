@@ -1,5 +1,4 @@
 import { ArticlePreview, Navigation, Testimonial } from "@/types/types";
-import { ReactNode } from "react";
 
 export const navbarItems:Navigation[] = [
     {
@@ -19,8 +18,8 @@ export const navbarItems:Navigation[] = [
         children: "Projets"
     },
     {
-        href: "/evenements",
-        children: "Évènements"
+        href: "/activites",
+        children: "Activités"
     },
     {
         href: "/blog",
