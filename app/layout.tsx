@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { settings } from "@/data/data";
+import { ReactQueryClientProvider } from "@/providers/queryProvider";
 
 const redHatDisplay = Red_Hat_Display({
   variable: "--font-red-hat-display",
@@ -55,9 +56,11 @@ export default function RootLayout({
       <body
         className={`${redHatDisplay.variable} ${redHatMono.variable} antialiased`}
       >
-        <Navbar/>
-        {children}
-        <Footer/>
+        <ReactQueryClientProvider>
+          <Navbar/>
+          {children}
+          <Footer/>
+        </ReactQueryClientProvider>
       </body>
     </html>
   );
