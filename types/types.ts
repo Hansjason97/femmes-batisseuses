@@ -18,3 +18,9 @@ export type ArticlePreview = {
     title: string;
     href: string;
 }
+
+export type HeaderProps = {
+    title: string;
+    description?: string;
+    img?: string;
+}

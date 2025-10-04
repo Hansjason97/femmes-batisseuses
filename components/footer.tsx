@@ -3,6 +3,7 @@ import Cta from './cta'
 import Link from 'next/link'
 import { navbarItems, socials } from '@/data/data'
 import { FooterLink } from './navLink'
+import NewsletterForm from './newsletterForm'
 
 function Footer() {
   return (
@@ -10,6 +11,7 @@ function Footer() {
       <Cta/>
       <footer className='bg-secondary-900 pt-10 sm:pt-12 md:pt-15'>
         <div className='mx-auto w-full max-w-7xl px-7 min-[1308px]:px-0 flex flex-wrap gap-8 justify-between'>
+          {/**1 */}
           <div className='w-full max-w-[312px] flex flex-col gap-3'>
             <Link href={"/"}><img src={"/images/logo_white.png"} className='h-12 w-auto'/></Link>
             <p className='text-sm text-gray-100'>{"Un réseau panafricain qui rassemble, forme et promeut les femmes leaders et bâtisseuses pour un développement inclusif, durable et équitable"}</p>
@@ -22,6 +24,7 @@ function Footer() {
               </ul>
             </div>
           </div>
+          {/**2 */}
           <div className='w-full max-w-[312px] flex flex-col gap-3 text-white'>
             <h5 className='text-base sm:text-lg font-semibold'>{"Liens rapides"}</h5>
             <ul className='flex flex-col gap-2'>
@@ -30,7 +33,9 @@ function Footer() {
               ))}
             </ul>
           </div>
+          {/**3 */}
           <div className='w-full max-w-[312px] flex flex-col gap-3 text-white'>
+            <NewsletterForm/>
             <div className='flex flex-col gap-2'>
               <span className='text-base font-semibold'>{"Assemblée générale"}</span>
               <p className='text-sm text-gray-200'>{"1234 Innovation Drive Suite 567 Cityville, State 89012 Country"}</p>
