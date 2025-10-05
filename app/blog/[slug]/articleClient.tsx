@@ -13,15 +13,16 @@ export default function ArticleClient({ slug }: { slug: string }) {
   if (!a) return <div>Article introuvable</div>;
 
   return (
-    <article className="box-container prose dark:prose-invert flex flex-col gap-7 sm:gap-10 items-center justify-center">
-      <div className="flex flex-col gap-3 sm:gap-5">
-        <h1 className="text-center">{a.title}</h1>
-        {a.preview_image && <img src={a.preview_image} className="w-full aspect-video h-auto object-cover rounded-sm sm:rounded-lg" />}
+    <article className="box-container prose dark:prose-invert flex flex-col gap-7 sm:gap-10 items-start justify-center">
+      <div className="flex flex-col gap-3 sm:gap-5 items-start justify-center">
+        <h1>{a.title}</h1>
+        <p className="text-text-gray max-w-5xl">{a.excerpt}</p>
+        {a.preview_image && <img src={a.preview_image} className="w-full max-w-3xl aspect-video h-auto object-cover" />}
       </div>
+      <div dangerouslySetInnerHTML={{ __html: a.content }} />
       <p className="text-sm text-zinc-500">
         {`Publié le ${new Date(a.date_published).toLocaleDateString()}`}
       </p>
-      <div dangerouslySetInnerHTML={{ __html: a.content as string }} />
     </article>
   );
 }
