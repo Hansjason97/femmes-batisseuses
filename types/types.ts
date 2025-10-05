@@ -28,3 +28,14 @@ export type HeaderProps = {
     description?: string;
     img?: string;
 }
+
+export type Article = {
+          content: string
+          date_published: string
+          date_updated: string
+          excerpt: string
+          id: string
+          preview_image: string | null
+          slug: string
+          title: string
+        };

@@ -5,7 +5,7 @@ import { useMemo } from 'react'
 
 let client: TypedSupabaseClient | undefined
 
-function getSupabaseBrowserClient() {
+export function getSupabaseBrowserClient() {
   if (client) {
     return client
   }

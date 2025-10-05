@@ -5,7 +5,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 export function q_articles(client: SupabaseClient) {
   return client
     .from("articles")
-    .select("slug,title,excerpt,preview_image,date_published,date_updated")
+    .select("*")
     .lte("date_published", new Date().toISOString())
     .order("date_published", { ascending: false });
 }

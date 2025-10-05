@@ -1,28 +1,23 @@
 // app/blog/ArticlesList.tsx  (Client Component)
 "use client";
-import Link from "next/link";
-import { useQuery } from "@supabase-cache-helpers/postgrest-react-query";
-import  useSupabaseBrowser  from "@/providers/supabase-browser";
+import ArticleCard, { ArticleSkeletonCard } from "@/components/article-card";
+import { getSupabaseBrowserClient } from "@/providers/supabase-browser";
 import { q_articles } from "@/queries/article";
+import { Article } from "@/types/types";
+import { useQuery } from "@supabase-cache-helpers/postgrest-react-query";
+import { useMemo } from 'react';
 
 export default function ArticlesList() {
-  const supabase = useSupabaseBrowser();
-  const { data } = useQuery(q_articles(supabase),{staleTime: 60 * 1000,}); // récupère le cache hydraté
+  const supabase = getSupabaseBrowserClient();
+  const query = useMemo(() => q_articles(supabase), [supabase]);
+  const { data, isSuccess, isLoading } = useQuery<Article[]>(query, { staleTime: 60 * 1000 }); // récupère le cache hydraté
 
   return (
-    <div className="mt-8 space-y-8">
-      {data?.map((a) => (
-        <article key={a.slug}>
-          <Link href={`/blog/${a.slug}`} className="text-2xl font-semibold hover:underline">
-            {a.title}
-          </Link>
-          <p className="text-sm text-zinc-500">
-            {a.date_published ? new Date(a.date_published as any).toLocaleDateString() : ""}
-          </p>
-          {a.preview_image && <img src={a.preview_image as string} alt="" className="my-3 rounded-lg" />}
-          <p>{a.excerpt}</p>
-        </article>
+    <>
+    {isLoading && Array.from({length: 8}).map((_,id)=>(<ArticleSkeletonCard key={id}/>))}
+      {isSuccess && data && data.map((a) => (
+        <ArticleCard key={a.slug} href={`/blog/${a.slug}`} img={a.preview_image??"/images/no-article.webp"} title={a.title}/>
       ))}
-    </div>
+    </>
   );
 }

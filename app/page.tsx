@@ -1,3 +1,4 @@
+import ArticleCard from "@/components/article-card";
 import Cta from "@/components/cta";
 import Testimonials from "@/components/testimonials";
 import { Button } from "@/components/ui/button";
@@ -84,13 +85,7 @@ export default function Home() {
         </div>
         <div className="w-full max-w-5xl grid grid-cols-1 gap-3 lg:grid-cols-3">
           {dataArticles.map((article, id)=>(
-            <div key={id} className="w-full max-w-sm mx-auto flex flex-col border">
-              <Link href={article.href}><img src={article.img} alt={article.title} className="w-full aspect-[4/3] h-auto object-cover" /></Link>
-              <div className="flex flex-col gap-4 p-5">
-                <h4 className="font-medium leading-[125%] text-[16px] md:text-[18px] line-clamp-2">{article.title}</h4>
-                <Link href={article.href}><Button>{"En savoir plus"}</Button></Link>
-              </div>
-            </div>
+            <ArticleCard key={id} {...article}/>
           ))}
         </div>
       </section>
