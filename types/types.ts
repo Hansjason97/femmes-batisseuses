@@ -18,7 +18,7 @@ export type Testimonial = {
 }
 
 export type ArticlePreview = {
-    img: string;
+    img?: string;
     title: string;
     href: string;
 }

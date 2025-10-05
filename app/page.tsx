@@ -1,28 +1,26 @@
+'use client'
 import ArticleCard from "@/components/article-card";
-import Cta from "@/components/cta";
+import HeroCarousel from "@/components/hero-carousel";
 import Testimonials from "@/components/testimonials";
 import { Button } from "@/components/ui/button";
 import { dataArticles, keyActions, reviews, stats } from "@/data/data";
+import { dataCarousel } from "@/data/heroSections";
+import { getSupabaseBrowserClient } from "@/providers/supabase-browser";
+import { q_articles } from "@/queries/article";
+import { Article } from "@/types/types";
+import { useQuery } from "@supabase-cache-helpers/postgrest-react-query";
 import Link from "next/link";
+import { useMemo } from "react";
 
 export default function Home() {
+  const supabase = getSupabaseBrowserClient();
+    const query = useMemo(() => q_articles(supabase), [supabase]);
+    const { data, isSuccess, isLoading } = useQuery<Article[]>(query, { staleTime: 60 * 1000 }); // récupère le cache hydraté
 
   return (
     <main>
       {/**Hero */}
-      <section id="hero" className="box-container grid grid-cols-1 gap-7 lg:grid-cols-3 lg:gap-8 xl:gap-10">
-        <div className="flex flex-col gap-5 sm:gap-7 md:gap-8 col-span-1 lg:col-span-2">
-          <div className="flex flex-col gap-2">
-            <h1><span className="text-primary-400">{"Bâtissons ensemble "}</span>{"l'Afrique de Demain"}</h1>
-            <p className="text-text-gray subtitle-text">{"Un réseau panafricain qui rassemble, forme et promeut les femmes leaders et bâtisseuses pour un développement inclusif, durable et équitable."}</p>
-          </div>
-          <div className="flex flex-row gap-3 flex-wrap">
-            <Link href={"/"}><Button size={"lg"} variant={"primary"}>{"Rejoindre le réseau"}</Button></Link>
-            <Link href={"/"}><Button size={"lg"} variant={"outline"}>{"Découvrir nos projets"}</Button></Link>
-          </div>
-        </div>
-        <img src={"/images/hero.webp"} alt="hero" className="hidden lg:flex w-full max-w-lg h-auto aspect-[4/3] object-cover rounded-sm sm:rounded-md md:rounded-lg"/>
-      </section>
+      <HeroCarousel items={dataCarousel}/>
       {/**Partners */}
       <div className="w-full h-20 bg-gray-100 flex items-center justify-center">{"Partenaires"}</div>
       {/**About us */}
@@ -84,8 +82,10 @@ export default function Home() {
           <p className="text-base md:text-lg">{"Suivez l’actualité du réseau et restez informés sur toutes nos activités en cours"}</p>
         </div>
         <div className="w-full max-w-5xl grid grid-cols-1 gap-3 lg:grid-cols-3">
-          {dataArticles.map((article, id)=>(
-            <ArticleCard key={id} {...article}/>
+          {
+            isSuccess && !!data &&
+          data.map((article, id)=>(
+            <ArticleCard key={id} href={`/blog/${article.slug}`} title={article.title} img={article.preview_image?? undefined}/>
           ))}
         </div>
       </section>

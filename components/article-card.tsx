@@ -10,7 +10,7 @@ function ArticleCard({ img, title, href }: ArticlePreview) {
     <div className="w-full max-w-sm mx-auto flex flex-col border">
       <Link href={href}>
         <img
-          src={img}
+          src={img ?? "/images/no-article.webp"}
           alt={title}
           className="w-full aspect-[4/3] h-auto object-cover"
         />

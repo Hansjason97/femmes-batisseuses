@@ -16,7 +16,7 @@ export default function ArticlesList() {
     <>
     {isLoading && Array.from({length: 8}).map((_,id)=>(<ArticleSkeletonCard key={id}/>))}
       {isSuccess && data && data.map((a) => (
-        <ArticleCard key={a.slug} href={`/blog/${a.slug}`} img={a.preview_image??"/images/no-article.webp"} title={a.title}/>
+        <ArticleCard key={a.slug} href={`/blog/${a.slug}`} img={a.preview_image?? undefined} title={a.title}/>
       ))}
     </>
   );

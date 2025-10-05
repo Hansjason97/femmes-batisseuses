@@ -1,4 +1,5 @@
 import { ArticlePreview, Navigation, Testimonial } from "@/types/types";
+import { ReactNode } from "react";
 
 export const navbarItems:Navigation[] = [
     {
