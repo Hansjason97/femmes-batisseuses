@@ -3,7 +3,8 @@ import ArticleCard from "@/components/article-card";
 import HeroCarousel from "@/components/hero-carousel";
 import Testimonials from "@/components/testimonials";
 import { Button } from "@/components/ui/button";
-import { dataArticles, keyActions, reviews, stats } from "@/data/data";
+import { Marquee } from "@/components/ui/marquee";
+import { dataArticles, keyActions, partners, reviews, stats } from "@/data/data";
 import { dataCarousel } from "@/data/heroSections";
 import { getSupabaseBrowserClient } from "@/providers/supabase-browser";
 import { q_articles } from "@/queries/article";
@@ -22,7 +23,12 @@ export default function Home() {
       {/**Hero */}
       <HeroCarousel items={dataCarousel}/>
       {/**Partners */}
-      <div className="w-full h-20 bg-gray-100 flex items-center justify-center">{"Partenaires"}</div>
+      <div className="w-full h-20 bg-gray-100 flex items-center justify-center">
+        <Marquee className="[--duration:20s]">
+          {partners.map(({src, name}, id)=>
+          <img key={id} src={src} alt={name} className="w-32 h-16 object-contain"/>)}
+        </Marquee>
+      </div>
       {/**About us */}
       <section id="about" className="box-container flex flex-col gap-7 lg:flex-row lg:justify-between">
         <img src="/images/about.webp" alt="about" className="w-full max-w-lg h-auto aspect-video object-cover rounded-sm sm:rounded-md md:rounded-lg" />

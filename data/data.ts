@@ -117,3 +117,10 @@ export const socials:{icon:string, href:string}[] = [
         href: "#"
     },
 ]; 
+
+export const partners:{src: string, name: string}[] = [
+    {src: "/images/partners/bds.png", name: "BDS Group"},
+    {src: "/images/partners/kmertech.png", name: "KmerTech"},
+    {src: "/images/partners/ise.png", name: "Ecole Internationale des Entrepreneurs"},
+    {src: "/images/partners/africa-startup-studio.png", name: "Africa Startup Studio"},
+];
