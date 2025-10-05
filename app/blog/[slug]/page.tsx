@@ -1,20 +1,18 @@
 // app/blog/[slug]/page.tsx (Server Component)
-import { notFound } from "next/navigation";
-import { cookies } from "next/headers";
+import { Button } from "@/components/ui/button";
+import { supabaseServer } from "@/lib/supabase-server";
+import { getSupabaseBrowserClient } from "@/providers/supabase-browser";
+import { q_articleBySlug } from "@/queries/article";
+import { prefetchQuery } from "@supabase-cache-helpers/postgrest-react-query";
 import {
   HydrationBoundary,
   QueryClient,
   dehydrate,
 } from "@tanstack/react-query";
-import { prefetchQuery } from "@supabase-cache-helpers/postgrest-react-query";
-import { supabaseServer } from "@/lib/supabase-server";
-import { q_articleBySlug } from "@/queries/article";
-import ArticleClient from "./articleClient";
-import { Metadata } from "next";
-import { getSupabaseBrowserClient } from "@/providers/supabase-browser";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { ArrowRight, HomeIcon } from "lucide-react";
+import { Metadata } from "next";
+import Link from "next/link";
+import ArticleClient from "./articleClient";
 
 export const revalidate = 60;
 
@@ -44,10 +42,11 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
+export default async function Page({ params }: { params: { slug: Promise<string>} }) {
+  const slug = await params.slug;
   const supabase = supabaseServer();
   const qc = new QueryClient();
-  const query = q_articleBySlug(await supabase, params.slug);
+  const query = q_articleBySlug(await supabase, slug);
   const { data } = await query; // pour 404 si besoin
   if (!data)
     return (
@@ -80,7 +79,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   await prefetchQuery(qc, query);
   return (
     <HydrationBoundary state={dehydrate(qc)}>
-      <ArticleClient slug={params.slug} />
+      <ArticleClient slug={slug} />
     </HydrationBoundary>
   );
 }
